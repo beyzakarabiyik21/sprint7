@@ -1,31 +1,28 @@
-import type { PageName } from "../../types/page";
+import { NavLink } from "react-router";
+import { useApp } from "../../context/useApp";
 
-interface NavigationProps {
-  current: PageName;
-  onNavigate: (page: PageName) => void;
-}
-
-const menuItems: { name: PageName; label: string }[] = [
-  { name: "home", label: "Ana Sayfa" },
-  { name: "events", label: "Etkinlikler" },
-  { name: "add", label: "Ekle" },
+const menuItems = [
+  { to: "/", label: "Ana Sayfa" },
+  { to: "/etkinlikler", label: "Etkinlikler" },
+  { to: "/yonetim", label: "Yönetim" },
+  { to: "/giris", label: "Giriş" },
 ];
 
-function Navigation({ current, onNavigate }: NavigationProps) {
+function Navigation() {
+  const { user } = useApp();
+
   return (
     <nav>
       {menuItems.map((item) => (
-        <a
-          key={item.name}
-          href="#"
-          className={current === item.name ? "aktif" : ""}
-          onClick={(e) => {
-            e.preventDefault();
-            onNavigate(item.name);
-          }}
+        <NavLink
+          key={item.to}
+          to={item.to}
+          end={item.to === "/"}
+          className={({ isActive }) => (isActive ? "aktif" : "")}
         >
-          {item.label}
-        </a>
+          {/* Giriş yapılınca "Giriş" yerine kullanıcı adı görünür */}
+          {item.to === "/giris" && user ? user.name : item.label}
+        </NavLink>
       ))}
     </nav>
   );

@@ -1,50 +1,163 @@
+import { useState } from "react";
+import type { FormEvent } from "react";
+import type { Category } from "../../types/campus-event";
+import type { EventInput } from "../../context/app-context";
+import { categories } from "../../data/events";
+import { cleanErrors } from "../../utils/validate";
+import type { Errors } from "../../utils/validate";
+import FormField from "./FormField";
+
+type Field = "title" | "category" | "date" | "time" | "location" | "capacity" | "description";
+
 interface EventFormProps {
-  onSubmit: () => void;
+  initial?: EventInput;
+  submitLabel: string;
+  onSubmit: (data: EventInput) => void;
 }
 
-function EventForm({ onSubmit }: EventFormProps) {
+const empty = {
+  title: "",
+  category: "",
+  date: "",
+  time: "",
+  location: "",
+  capacity: "",
+  description: "",
+};
+
+function EventForm({ initial, submitLabel, onSubmit }: EventFormProps) {
+  const [values, setValues] = useState<Record<Field, string>>(
+    initial ? { ...initial, capacity: String(initial.capacity) } : empty
+  );
+  const [errors, setErrors] = useState<Errors<Field>>({});
+
+  function change(field: Field, value: string) {
+    setValues((v) => ({ ...v, [field]: value }));
+    setErrors((e) => ({ ...e, [field]: undefined }));
+  }
+
+  function validate(): Errors<Field> {
+    const capacity = Number(values.capacity);
+    return cleanErrors<Field>({
+      title:
+        values.title.trim().length < 3 ? "Etkinlik adı en az 3 karakter olmalıdır." : undefined,
+      category: !values.category ? "Lütfen bir kategori seçin." : undefined,
+      date: !values.date ? "Tarih zorunludur." : undefined,
+      time: !values.time ? "Saat zorunludur." : undefined,
+      location: !values.location.trim() ? "Yer zorunludur." : undefined,
+      capacity:
+        !values.capacity || !Number.isInteger(capacity) || capacity < 1
+          ? "Kontenjan 1 veya daha büyük bir tam sayı olmalıdır."
+          : undefined,
+      description:
+        values.description.trim().length < 10
+          ? "Açıklama en az 10 karakter olmalıdır."
+          : undefined,
+    });
+  }
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const found = validate();
+    setErrors(found);
+    if (Object.keys(found).length > 0) return;
+
+    onSubmit({
+      ...initial,
+      title: values.title.trim(),
+      category: values.category as Category,
+      date: values.date,
+      time: values.time,
+      location: values.location.trim(),
+      capacity: Number(values.capacity),
+      description: values.description.trim(),
+    });
+  }
+
+  // Her alan için ortak erişilebilirlik özellikleri
+  const a11y = (field: Field) => ({
+    id: field,
+    "aria-invalid": errors[field] ? true : undefined,
+    "aria-describedby": errors[field] ? `${field}-hata` : undefined,
+  });
+
   return (
-    <>
-      <p className="bilgi">Bu sprintte form sadece görünüm; kayıt yapılmaz.</p>
-      <form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
-      >
-        <label htmlFor="title">Etkinlik Adı</label>
-        <input type="text" id="title" maxLength={80} required />
+    <form className="form" noValidate onSubmit={handleSubmit}>
+      <FormField id="title" label="Etkinlik Adı" error={errors.title}>
+        <input
+          type="text"
+          maxLength={80}
+          value={values.title}
+          onChange={(e) => change("title", e.target.value)}
+          {...a11y("title")}
+        />
+      </FormField>
 
-        <label htmlFor="category">Kategori</label>
-        <select id="category" required>
+      <FormField id="category" label="Kategori" error={errors.category}>
+        <select
+          value={values.category}
+          onChange={(e) => change("category", e.target.value)}
+          {...a11y("category")}
+        >
           <option value="">Seçiniz</option>
-          <option value="Seminer">Seminer</option>
-          <option value="Atölye">Atölye</option>
-          <option value="Söyleşi">Söyleşi</option>
-          <option value="Yarışma">Yarışma</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
         </select>
+      </FormField>
 
-        <label htmlFor="capacity">Kontenjan</label>
-        <input type="number" id="capacity" min={1} required />
+      <FormField id="date" label="Tarih" error={errors.date}>
+        <input
+          type="date"
+          value={values.date}
+          onChange={(e) => change("date", e.target.value)}
+          {...a11y("date")}
+        />
+      </FormField>
 
-        <label htmlFor="date">Tarih</label>
-        <input type="date" id="date" required />
+      <FormField id="time" label="Saat" error={errors.time}>
+        <input
+          type="time"
+          value={values.time}
+          onChange={(e) => change("time", e.target.value)}
+          {...a11y("time")}
+        />
+      </FormField>
 
-        <label htmlFor="time">Saat</label>
-        <input type="time" id="time" required />
+      <FormField id="location" label="Yer" error={errors.location}>
+        <input
+          type="text"
+          value={values.location}
+          onChange={(e) => change("location", e.target.value)}
+          {...a11y("location")}
+        />
+      </FormField>
 
-        <label htmlFor="location">Konum</label>
-        <input type="text" id="location" required />
+      <FormField id="capacity" label="Kontenjan" error={errors.capacity}>
+        <input
+          type="number"
+          min={1}
+          value={values.capacity}
+          onChange={(e) => change("capacity", e.target.value)}
+          {...a11y("capacity")}
+        />
+      </FormField>
 
-        <label htmlFor="description">Açıklama</label>
-        <textarea id="description" rows={5} required />
+      <FormField id="description" label="Açıklama" error={errors.description}>
+        <textarea
+          rows={6}
+          value={values.description}
+          onChange={(e) => change("description", e.target.value)}
+          {...a11y("description")}
+        />
+      </FormField>
 
-        <button type="submit" className="buton" style={{ marginTop: "1rem" }}>
-          Kaydet
-        </button>
-      </form>
-    </>
+      <button type="submit" className="buton">
+        {submitLabel}
+      </button>
+    </form>
   );
 }
 

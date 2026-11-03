@@ -1,39 +1,57 @@
-# Kampüs Etkinlikleri — Sprint 5
+# Kampüs Etkinlikleri
+
+Fakültedeki seminer, atölye, söyleşi ve yarışmaları listeleyen, aranabilen ve yönetilebilen React + TypeScript uygulaması.
 
 **Canlı site:** [https://sprint-5-tau.vercel.app](https://sprint-5-tau.vercel.app)
 
 **Deployment:** [https://sprint-5-8qidvxj5d-beyza13.vercel.app](https://sprint-5-8qidvxj5d-beyza13.vercel.app)
 
+Beyza Karabiyik · 2416501003
 
-## React + TypeScript + Vite
+## Özellikler
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+- **10 route** (React Router)
+- **Context API** (`AppContext`): etkinlik listesi ve kullanıcı bilgisi tüm sayfalarda ortak kullanılır
+- **Ekle / güncelle / sil**: Yönetim sayfasından yapılır, silmeden önce onay istenir; değişiklikler ana sayfa, liste ve detay sayfalarına anında yansır (localStorage'a da kaydedilir)
+- **Arama ve kategori filtresi**: Etkinlikler sayfasında
+- **Form doğrulama**: etkinlik formu, giriş, kayıt ve şifremi unuttum formlarında alan bazlı hata mesajları
+- **Mobil uyumlu** görünüm
 
-Currently, two official plugins are available:
+## Sayfalar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Route | Sayfa |
+| --- | --- |
+| `/` | Ana sayfa (yaklaşan 2 etkinlik) |
+| `/etkinlikler` | Tüm etkinlikler, arama ve filtre |
+| `/etkinlikler/:id` | Etkinlik detayı |
+| `/yonetim` | Etkinlik yönetimi (tablo, düzenle, sil) |
+| `/yonetim/ekle` | Etkinlik ekle |
+| `/yonetim/duzenle/:id` | Etkinlik güncelle |
+| `/giris` | Giriş yap |
+| `/kayit` | Kayıt ol |
+| `/sifremi-unuttum` | Şifremi unuttum |
+| `*` | 404 sayfası |
 
-## React Compiler
+## Klasör yapısı
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```
+src/
+  components/
+    events/    EventCard, EventList, EventFilter, EventDetail
+    forms/     EventForm, FormField
+    layout/    Header, Navigation, Footer, Layout
+  context/     AppContext
+  data/        events
+  pages/       10 sayfa bileşeni
+  types/       campus-event
+  utils/       filter-events, format-date, validate
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Çalıştırma
+
+```bash
+npm install
+npm run dev
+```
+
+`vercel.json`, sayfa yenilendiğinde route'ların Vercel'de 404 vermemesi için tüm istekleri `index.html`'e yönlendirir.
