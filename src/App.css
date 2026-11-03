@@ -399,8 +399,57 @@ footer p {
     padding: 0.6rem 1.4rem;
   }
 
+  /* Tablo telefonda yana kaymaz; her satır alt alta bilgiler içeren bir kart olur */
+  .yonetim-tablosu {
+    min-width: 0;
+    background: none;
+  }
+
+  .yonetim-tablosu thead {
+    display: none;
+  }
+
+  .yonetim-tablosu,
+  .yonetim-tablosu tbody,
+  .yonetim-tablosu tr,
+  .yonetim-tablosu td {
+    display: block;
+    width: 100%;
+  }
+
+  .yonetim-tablosu tr {
+    background: #fff;
+    border: 1px solid var(--renk-cizgi);
+    border-top: 4px solid var(--renk-ana);
+    border-radius: var(--kose);
+    padding: 0.6rem 1rem 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .yonetim-tablosu td {
+    border: none;
+    padding: 0.2rem 0;
+  }
+
+  .yonetim-tablosu td[data-label="Etkinlik"] {
+    font-size: 1.15rem;
+    font-weight: bold;
+  }
+
+  .yonetim-tablosu td[data-label="Tarih"]::before,
+  .yonetim-tablosu td[data-label="Kategori"]::before {
+    content: attr(data-label) ": ";
+    font-weight: bold;
+  }
+
+  .yonetim-tablosu td.islem-butonlari {
+    display: flex;
+    padding-top: 0.6rem;
+  }
+
   .yonetim-tablosu .buton,
   .yonetim-tablosu .buton.tehlike {
-    padding: 0.5rem 1rem;
+    flex: 1;
+    padding: 0.6rem 1rem;
   }
 }

@@ -38,9 +38,9 @@ function AdminPage() {
               <tbody>
                 {events.map((event) => (
                   <tr key={event.id}>
-                    <td>{event.title}</td>
-                    <td>{formatDate(event.date)}</td>
-                    <td>{event.category}</td>
+                    <td data-label="Etkinlik">{event.title}</td>
+                    <td data-label="Tarih">{formatDate(event.date)}</td>
+                    <td data-label="Kategori">{event.category}</td>
                     <td className="islem-butonlari">
                       <Link to={`/yonetim/duzenle/${event.id}`} className="buton">
                         Düzenle
