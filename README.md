@@ -2,9 +2,7 @@
 
 Fakültedeki seminer, atölye, söyleşi ve yarışmaları listeleyen, aranabilen ve yönetilebilen React + TypeScript uygulaması.
 
-**Canlı site:** [https://sprint-5-tau.vercel.app](https://sprint-5-tau.vercel.app)
-
-**Deployment:** [https://sprint-5-8qidvxj5d-beyza13.vercel.app](https://sprint-5-8qidvxj5d-beyza13.vercel.app)
+**Canlı site:** [https://beyzakarabiyik-frontend.vercel.app](https://beyzakarabiyik-frontend.vercel.app)
 
 Beyza Karabiyik · 2416501003
 
