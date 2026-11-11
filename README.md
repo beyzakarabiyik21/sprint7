@@ -2,8 +2,6 @@
 
 Fakültedeki seminer, atölye, söyleşi ve yarışmaları listeleyen, aranabilen ve yönetilebilen React + TypeScript uygulaması.
 
-**Canlı site:** [https://beyzakarabiyik-frontend.vercel.app](https://beyzakarabiyik-frontend.vercel.app)
-
 Beyza Karabiyik · 2416501003
 
 ## Özellikler
