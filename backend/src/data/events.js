@@ -7,7 +7,7 @@ export const events = [
     capacity: 90,
     date: "2026-10-13",
     time: "14:00",
-    location: "Fen Fakültesi Planetaryum Salonu",
+    location: "SDÜ Mühendislik Fakültesi Konferans Salonu",
     description: "Avuç içi büyüklüğündeki uyduları yöneten kodun uzayda nasıl güncellendiğini anlatıyoruz.",
   },
   {
@@ -17,7 +17,7 @@ export const events = [
     capacity: 18,
     date: "2026-10-21",
     time: "10:30",
-    location: "Kampüs Kafeteryası Üst Kat",
+    location: "SDÜ Doğu Kampüsü Öğrenci Kafeteryası",
     description: "Kafeteryanın bir yıllık kahve satışlarından Python ile renkli grafikler çiziyoruz.",
   },
   {
@@ -27,7 +27,7 @@ export const events = [
     capacity: 60,
     date: "2026-10-28",
     time: "13:00",
-    location: "B Blok Amfi 3",
+    location: "SDÜ Hukuk Fakültesi Amfi 1",
     description: "Adli bilişim uzmanıyla gerçek bir siber olayın izini adım adım sürüyoruz.",
   },
   {
@@ -37,7 +37,7 @@ export const events = [
     capacity: 16,
     date: "2026-11-04",
     time: "15:00",
-    location: "Elektronik Laboratuvarı",
+    location: "SDÜ Teknoloji Fakültesi Elektronik Laboratuvarı",
     description: "Lehim, multimetre ve sabırla çekmecedeki bozuk cihazları birlikte onarıyoruz.",
   },
   {
@@ -47,7 +47,7 @@ export const events = [
     capacity: 24,
     date: "2026-11-12",
     time: "18:30",
-    location: "Merkez Kütüphane Bodrum Kat",
+    location: "SDÜ Merkez Kütüphanesi Grup Çalışma Salonu",
     description: "Kilitli kapılar yalnızca doğru kodu yazan takımlara açılıyor; 90 dakikanız var.",
   },
   {
@@ -57,7 +57,7 @@ export const events = [
     capacity: 120,
     date: "2026-11-19",
     time: "16:00",
-    location: "Güzel Sanatlar Konser Salonu",
+    location: "SDÜ Güzel Sanatlar Fakültesi Konser Salonu",
     description: "Bir modelin ürettiği melodiyi canlı dinleyip insan bestesiyle karşılaştırıyoruz.",
   },
 ];
