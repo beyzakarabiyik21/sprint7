@@ -49,13 +49,16 @@ Bütün hatalar aynı biçimde döner:
 
 ### POST /events gövdesi
 
-`title`, `category` ve `date` zorunludur. Eksikse `400` döner.
+`title`, `category` ve `date` zorunludur. Eksikse `400` döner. Gönderilmeyen `time`, `location` ve `description` boş metin, `capacity` ise `0` olarak kaydedilir.
 
 ```json
 {
   "title": "Git Atölyesi",
   "category": "Atölye",
   "date": "2026-12-01",
+  "time": "14:00",
+  "location": "SDÜ Mühendislik Fakültesi Bilgisayar Laboratuvarı 1",
+  "description": "Git ve GitHub ile ilk adımlar.",
   "capacity": 30
 }
 ```
@@ -64,14 +67,14 @@ Bütün hatalar aynı biçimde döner:
 
 `requests/kampus-api.json` dosyası Postman'e içe aktarılabilir (Import → dosyayı seç). İçinde 6 test isteği vardır:
 
-| # | İstek | Beklenen |
-| --- | --- | --- |
-| 1 | GET `/health` | 200 · ok + student |
-| 2 | GET `/events` | 200 · 6 kayıt |
-| 3 | GET `/events/event-2` | 200 · event-2 |
-| 4 | GET `/events/yok` | 404 · error |
-| 5 | POST `/events` (tam body) | 201 · yeni id |
-| 6 | POST `/events` (sadece title) | 400 · error |
+| # | Postman'deki adı | İstek | Beklenen |
+| --- | --- | --- | --- |
+| 1 | Health | GET `/health` | 200 · ok + student |
+| 2 | Etkinlik listesi | GET `/events` | 200 · 6 kayıt |
+| 3 | Tek etkinlik | GET `/events/event-2` | 200 · event-2 |
+| 4 | Olmayan etkinlik (404) | GET `/events/yok` | 404 · error |
+| 5 | Etkinlik oluştur (201) | POST `/events` (tam body) | 201 · yeni id |
+| 6 | Eksik veri (400) | POST `/events` (sadece title) | 400 · error |
 
 ## Klasör yapısı
 
