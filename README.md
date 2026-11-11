@@ -44,4 +44,5 @@ backend/
   .env.example  .gitignore
   package.json  README.md
 README.md
+vercel.json            Vercel'e siteyi frontend/ klasöründen yayınlamasını söyler
 ```
