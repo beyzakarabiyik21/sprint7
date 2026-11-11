@@ -5,7 +5,7 @@ import { events as initialEvents } from "../data/events";
 import { AppContext } from "./app-context";
 import type { EventInput, User } from "./app-context";
 
-const STORAGE_KEY = "kampus-etkinlikleri";
+const STORAGE_KEY = "kampus-etkinlikleri-v2";
 
 // Kayıtlı veri varsa onu, yoksa başlangıç verisini kullan
 function loadEvents(): CampusEvent[] {

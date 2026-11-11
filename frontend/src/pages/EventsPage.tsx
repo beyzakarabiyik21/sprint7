@@ -15,7 +15,7 @@ function EventsPage() {
 
   return (
     <>
-      <Header title="Tüm Etkinlikler" text="Ekim ayında kampüste düzenlenen etkinlikler." />
+      <Header title="Tüm Etkinlikler" text="Ekim ve kasım aylarında kampüste düzenlenen etkinlikler." />
       <main>
         <EventFilter
           searchText={searchText}
