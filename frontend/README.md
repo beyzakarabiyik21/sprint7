@@ -2,7 +2,7 @@
 
 Fakültedeki seminer, atölye, söyleşi ve yarışmaları listeleyen, aranabilen ve yönetilebilen React + TypeScript uygulaması.
 
-**Canlı site:** [https://beyzakarabiyik-frontend.vercel.app](https://beyzakarabiyik-frontend.vercel.app)
+
 
 Beyza Karabiyik · 2416501003
 
@@ -51,5 +51,3 @@ src/
 npm install
 npm run dev
 ```
-
-`vercel.json`, sayfa yenilendiğinde route'ların Vercel'de 404 vermemesi için tüm istekleri `index.html`'e yönlendirir.
