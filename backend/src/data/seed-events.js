@@ -1,7 +1,6 @@
-// Bellek içi veri: sunucu yeniden başlayınca POST ile eklenenler kaybolur
-export const events = [
+// Örnek veri: npm run seed ile veritabanına eklenir (id yok, MongoDB _id verir)
+export const seedEvents = [
   {
-    id: "event-1",
     title: "Yörüngedeki Yazılım: Küp Uydu Semineri",
     category: "Seminer",
     capacity: 90,
@@ -11,7 +10,6 @@ export const events = [
     description: "Avuç içi büyüklüğündeki uyduları yöneten kodun uzayda nasıl güncellendiğini anlatıyoruz.",
   },
   {
-    id: "event-2",
     title: "Kahve ve Kod: Veri Görselleştirme Atölyesi",
     category: "Atölye",
     capacity: 18,
@@ -21,7 +19,6 @@ export const events = [
     description: "Kafeteryanın bir yıllık kahve satışlarından Python ile renkli grafikler çiziyoruz.",
   },
   {
-    id: "event-3",
     title: "Dijital Dedektif: Bir Veri Sızıntısının Perde Arkası",
     category: "Söyleşi",
     capacity: 60,
@@ -31,7 +28,6 @@ export const events = [
     description: "Adli bilişim uzmanıyla gerçek bir siber olayın izini adım adım sürüyoruz.",
   },
   {
-    id: "event-4",
     title: "Eski Telefona Yeni Hayat: Tamir Atölyesi",
     category: "Atölye",
     capacity: 16,
@@ -41,7 +37,6 @@ export const events = [
     description: "Lehim, multimetre ve sabırla çekmecedeki bozuk cihazları birlikte onarıyoruz.",
   },
   {
-    id: "event-5",
     title: "Kampüs Kaçış Odası: Algoritma Bulmacaları",
     category: "Yarışma",
     capacity: 24,
@@ -51,7 +46,6 @@ export const events = [
     description: "Kilitli kapılar yalnızca doğru kodu yazan takımlara açılıyor; 90 dakikanız var.",
   },
   {
-    id: "event-6",
     title: "Makine Besteler mi? Yapay Zekâ ve Müzik Semineri",
     category: "Seminer",
     capacity: 120,
