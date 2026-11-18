@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "542d1a33-7963-4183-a017-1956b971df65",
 		"name": "Kampüs API",
-		"description": "Kampüs Etkinlikleri REST API için 6 test isteği. Adres: http://localhost:3000",
+		"description": "Kampüs Etkinlikleri REST API (MongoDB) için 6 test isteği. Önce npm run seed çalıştırın. Adres: http://localhost:3000",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "60118681",
 		"_collection_link": "https://go.postman.co/collection/60118681-542d1a33-7963-4183-a017-1956b971df65?source=collection_link"
@@ -52,7 +52,10 @@
 						"type": "text/javascript",
 						"exec": [
 							"pm.test('200 OK', () => pm.response.to.have.status(200));",
-							"pm.test('6 kayıt', () => pm.expect(pm.response.json()).to.have.lengthOf(6));"
+							"pm.test('6 kayıt (seed sonrası)', () => pm.expect(pm.response.json()).to.have.lengthOf(6));",
+							"// 3. istek için listeden bir _id sakla",
+							"const list = pm.response.json();",
+							"if (list.length > 1) pm.collectionVariables.set('eventId', list[1]._id);"
 						]
 					}
 				}
@@ -83,7 +86,7 @@
 						"type": "text/javascript",
 						"exec": [
 							"pm.test('200 OK', () => pm.response.to.have.status(200));",
-							"pm.test('id event-2', () => pm.expect(pm.response.json().id).to.eql('event-2'));"
+							"pm.test('_id eşleşiyor', () => pm.expect(pm.response.json()._id).to.eql(pm.collectionVariables.get('eventId')));"
 						]
 					}
 				}
@@ -92,7 +95,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/events/event-2",
+					"raw": "http://localhost:3000/events/{{eventId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -100,7 +103,7 @@
 					"port": "3000",
 					"path": [
 						"events",
-						"event-2"
+						"{{eventId}}"
 					]
 				}
 			},
@@ -147,7 +150,11 @@
 						"type": "text/javascript",
 						"exec": [
 							"pm.test('201 Created', () => pm.response.to.have.status(201));",
-							"pm.test('yeni id', () => pm.expect(pm.response.json().id).to.be.a('string'));"
+							"pm.test('_id ve createdAt var', () => {",
+							"  const body = pm.response.json();",
+							"  pm.expect(body._id).to.be.a('string');",
+							"  pm.expect(body.createdAt).to.be.a('string');",
+							"});"
 						]
 					}
 				}
@@ -227,6 +234,12 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "eventId",
+			"value": ""
 		}
 	]
 }
